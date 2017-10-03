@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package p001
 
 func twoSum(nums []int, target int) []int {
 	for i,vi := range nums {
@@ -12,14 +10,4 @@ func twoSum(nums []int, target int) []int {
 	}
 
 	panic("invalid inputs")
-}
-
-func main() {
-	var numbers = []int {3,2,4}
-	var target = 6
-
-	var indins = twoSum(numbers, target)
-	for idx, val := range indins {
-		fmt.Println(idx, ":", val)
-	}
 }
