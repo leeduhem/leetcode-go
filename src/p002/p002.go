@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package p002
 
 type ListNode struct {
 	Val int
@@ -43,13 +41,4 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 
 	return sum.Next
-}
-
-func main() {
-	var l1 = &ListNode{2, &ListNode{4, &ListNode{3, nil}}}
-	var l2 = &ListNode{5, &ListNode{6, &ListNode{4, nil}}}
-
-	for sum := addTwoNumbers(l1, l2); sum != nil; sum = sum.Next {
-		fmt.Println(sum.Val)
-	}
 }
