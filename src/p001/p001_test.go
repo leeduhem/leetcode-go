@@ -9,11 +9,11 @@ func TestTwoSum(t *testing.T) {
 
 	indins1 := twoSum(nums1, target1)
 	if (len(indins1) != len(answer1)) {
-		t.Error("Expected ", answer1)
+		t.Fatalf("Case %v: expected %v, got %v", nums1, answer1, indins1)
 	}
 	for i,v := range indins1 {
 		if (v != answer1[i]) {
-			t.Errorf("Expected %c, got %c", answer1[i], v)
+			t.Fatalf("Case %v: expected %v, got %v", nums1, answer1, indins1)
 		}
 	}
 }
