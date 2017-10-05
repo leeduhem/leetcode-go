@@ -29,12 +29,12 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		d1,ok1 := <-ds1
 		d2,ok2 := <-ds2
 
-		if (!ok1 && !ok2) {
+		if !ok1 && !ok2 {
 			break
 		}
 
 		s := d1 + d2 + carry
-		if (s > 9) {
+		if s > 9 {
 			s -= 10
 			carry = 1
 		} else {
@@ -45,7 +45,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		end = end.Next
 	}
 
-	if (carry != 0) {
+	if carry != 0 {
 		end.Next = &ListNode{ carry, nil }
 		end = end.Next
 	}
