@@ -19,11 +19,7 @@ func findSubstring(s string, words []string) []int {
 
 		for j := i; j < i + k * wlen; j += wlen {
 			key := s[j:j+wlen]
-			if v,ok := m[key]; ok {
-				m[key] = v + 1
-			} else {
-				m[key] = 1
-			}
+			m[key] += 1
 		}
 
 		for _,w := range words {
