@@ -5,7 +5,7 @@ import . "testing/utils"
 
 func testCase(in0 []int, out0 [][]int, t *testing.T) {
 	out1 := permute(in0)
-	if ! CmpMatrix(out0, out1) {
+	if ! Is2DIntsEqualWithoutOrder(out0, out1) {
 		t.Errorf("Case %v: expected %v, got %v", in0, out0, out1)
 	}
 }
