@@ -83,3 +83,22 @@ func Is2DIntMatrixEqual(m, m1 [][]int) bool {
 
 	return true
 }
+
+func Is2DStrsEqualWithoutOrder(in0, in1 [][]string) bool {
+	if len(in0) != len(in1) {
+		return false
+	}
+
+	m := map[string]int {}
+	for i,ss := range in0 {
+		k := strings.Join(ss, ",")
+		m[k] = i
+	}
+
+	for _,ss := range in1 {
+		k := strings.Join(ss, ",")
+		delete(m, k)
+	}
+
+	return len(m) == 0
+}
