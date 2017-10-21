@@ -102,3 +102,17 @@ func Is2DStrsEqualWithoutOrder(in0, in1 [][]string) bool {
 
 	return len(m) == 0
 }
+
+func IsIntsEqual(ns, ns1 []int) bool {
+	if len(ns) != len(ns1) {
+		return false
+	}
+
+	for i,n := range ns {
+		if n != ns1[i] {
+			return false
+		}
+	}
+
+	return true
+}
