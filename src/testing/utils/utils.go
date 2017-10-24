@@ -116,3 +116,17 @@ func IsIntsEqual(ns, ns1 []int) bool {
 
 	return true
 }
+
+func IsStrsEqual(ss, ss1 []string) bool {
+	if len(ss) != len(ss1) {
+		return false
+	}
+
+	for i,s := range ss {
+		if s != ss1[i] {
+			return false
+		}
+	}
+
+	return true
+}
