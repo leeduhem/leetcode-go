@@ -59,7 +59,7 @@ func Is2DIntsEqualWithoutOrder(in0, in1 [][]int) bool {
 	return len(m) == 0
 }
 
-func DeepCopy2DMatrix(m [][]int) [][]int {
+func DeepCopy2DIntMatrix(m [][]int) [][]int {
 	m1 := make([][]int, len(m))
 	for i,r := range m {
 		m1[i] = make([]int, len(r))

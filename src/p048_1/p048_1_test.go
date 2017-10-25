@@ -4,7 +4,7 @@ import "testing"
 import . "testing/utils"
 
 func testCase(in0, out0 [][]int, t *testing.T) {
-	in01 := DeepCopy2DMatrix(in0)
+	in01 := DeepCopy2DIntMatrix(in0)
 	rotate(in0)
 	if ! Is2DIntMatrixEqual(out0, in0) {
 		t.Errorf("Case \n%v\n: expected \n%v, got \n%v", IntMatrix(in01), IntMatrix(out0), IntMatrix(in0))
