@@ -103,6 +103,12 @@ func Is2DStrsEqualWithoutOrder(in0, in1 [][]string) bool {
 	return len(m) == 0
 }
 
+func DeepCopyInts(in []int) []int {
+	in1 := make([]int, len(in))
+	copy(in1, in)
+	return in1
+}
+
 func IsIntsEqual(ns, ns1 []int) bool {
 	if len(ns) != len(ns1) {
 		return false
