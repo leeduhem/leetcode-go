@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -32,6 +33,7 @@ func (m IntMatrix) String() string {
 }
 
 func Ints2Key(ns []int) string {
+	sort.Ints(ns)
 	ss := []string {}
 	for _,n := range ns {
 		ss = append(ss, strconv.Itoa(n))
