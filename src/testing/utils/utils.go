@@ -138,3 +138,23 @@ func IsStrsEqual(ss, ss1 []string) bool {
 
 	return true
 }
+
+func IsStrsEqualWithoutOrder(ss, ss1 []string) bool {
+	if len(ss) != len(ss1) {
+		return false
+	}
+
+	m := map[string]int {}
+	for i := 0; i < len(ss); i++ {
+		m[ss[i]]++
+		m[ss1[i]]--
+	}
+
+	for _, v := range m {
+		if v != 0 {
+			return false
+		}
+	}
+
+	return true
+}
