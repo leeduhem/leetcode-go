@@ -86,6 +86,26 @@ func Is2DIntMatrixEqual(m, m1 [][]int) bool {
 	return true
 }
 
+func Is2DIntsEqual(nss1, nss2 [][]int) bool {
+	if len(nss1) != len(nss2) {
+		return false
+	}
+
+	for i, ns1 := range nss1 {
+		if len(ns1) != len(nss2[i]) {
+			return false
+		}
+
+		for j, n1 := range ns1 {
+			if n1 != nss2[i][j] {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
 func Is2DStrsEqualWithoutOrder(in0, in1 [][]string) bool {
 	if len(in0) != len(in1) {
 		return false
