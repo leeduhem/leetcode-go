@@ -4,14 +4,17 @@ import (
 	"testing"
 )
 
+func check(ci int, cnt *int, want, got int, t *testing.T) {
+	if got != want {
+		t.Errorf("Case %v [%v]: expected %v, got %v", ci, *cnt, want, got)
+	}
+	*cnt++
+}
+
 func testCase0(t *testing.T) {
-	ci, cnt := 0, 0
-	got, want := 0, 0
+	var cnt, got, want int
 	check := func() {
-		if got != want {
-			t.Errorf("Case %v [%v]: expected %v, got %v", ci, cnt, want, got)
-		}
-		cnt++
+		check(0, &cnt, want, got, t)
 	}
 
 	cache := Constructor(2)
@@ -27,13 +30,9 @@ func testCase0(t *testing.T) {
 }
 
 func testCase1(t *testing.T) {
-	ci, cnt := 1, 0
-	got, want := 0, 0
+	var cnt, got, want int
 	check := func() {
-		if got != want {
-			t.Errorf("Case %v [%v]: expected %v, got %v", ci, cnt, want, got)
-		}
-		cnt++
+		check(1, &cnt, want, got, t)
 	}
 
 	cache := Constructor(2)
@@ -47,13 +46,9 @@ func testCase1(t *testing.T) {
 }
 
 func testCase2(t *testing.T) {
-	ci, cnt := 2, 0
-	got, want := 0, 0
+	var cnt, got, want int
 	check := func() {
-		if got != want {
-			t.Errorf("Case %v [%v]: expected %v, got %v", ci, cnt, want, got)
-		}
-		cnt++
+		check(2, &cnt, want, got, t)
 	}
 
 	cache := Constructor(2)
