@@ -1,0 +1,4 @@
+# Go files and directories
+*.o
+bin/
+pkg/
