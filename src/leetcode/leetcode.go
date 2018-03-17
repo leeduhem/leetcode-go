@@ -1,10 +1,13 @@
 package main
 
 import (
-	"os"
-	"fmt"
 	"flag"
+	"fmt"
+	"os"
 	"strconv"
+
+	cmdInit "leetcode/cmd/init"
+	cmdShift "leetcode/cmd/shift"
 )
 
 // Global flags
@@ -16,8 +19,8 @@ func init() {
 
 func Usage() {
 	fmt.Fprintf(os.Stderr, "Usage: %s [global options] command [options]\n\n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "\t%-16s%s\n", "initiate", "Initiate source code directory")
-	fmt.Fprintf(os.Stderr, "\t%-16s%s\n", "shift",  "Shift an existed solution")
+	fmt.Fprintf(os.Stderr, "\t%-16s%s\n", "init", "Initiate source code directory")
+	fmt.Fprintf(os.Stderr, "\t%-16s%s\n", "shift", "Shift an existed solution")
 
 	fmt.Fprintf(os.Stderr, "\nGlobal options:\n")
 	flag.CommandLine.PrintDefaults()
@@ -44,7 +47,7 @@ func main() {
 		Usage()
 		os.Exit(2)
 
-	case "initiate":
+	case "init":
 		cmdFlagSet := flag.NewFlagSet(cmd, flag.ExitOnError)
 		cmdFlagSet.Usage = func() {
 			cmdUsage(cmdFlagSet, "Usage: %s id\n", cmd)
@@ -62,7 +65,8 @@ func main() {
 			os.Exit(2)
 		}
 
-		doInitiateCmd(id)
+		cmdInit.SetVerbose(Verbose)
+		cmdInit.Do(id)
 
 	case "shift":
 		cmdFlagSet := flag.NewFlagSet(cmd, flag.ExitOnError)
@@ -82,14 +86,7 @@ func main() {
 			os.Exit(2)
 		}
 
-		doShiftCmd(id)
+		cmdShift.SetVerbose(Verbose)
+		cmdShift.Do(id)
 	}
-}
-
-func doInitiateCmd(id int) {
-	fmt.Println("Doing Initiate Command")
-}
-
-func doShiftCmd(id int) {
-	fmt.Println("Doing Shift Command")
 }
