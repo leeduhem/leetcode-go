@@ -28,9 +28,13 @@ func Usage() {
 
 func cmdUsage(f *flag.FlagSet, usage, cmd string) {
 	fmt.Fprintf(f.Output(), usage, cmd)
-	// TODO: Print usage message of options ONLY when there are some
-	fmt.Fprintf(f.Output(), "\nCommand options:\n")
-	f.PrintDefaults()
+
+	var flagNum int
+	f.VisitAll(func(flg *flag.Flag) { flagNum++ })
+	if flagNum > 0 {
+		fmt.Fprintf(f.Output(), "\nCommand options:\n")
+		f.PrintDefaults()
+	}
 }
 
 func main() {
