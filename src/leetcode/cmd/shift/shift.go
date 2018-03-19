@@ -17,8 +17,10 @@ var verbose int
 func SetVerbose(v bool) {
 	if v {
 		verbose = 1
+		util.SetVerbose(v)
 	} else {
 		verbose = 0
+		util.SetVerbose(v)
 	}
 }
 
@@ -82,7 +84,7 @@ func copyPdir(srcDir, pDir string, num int) {
 			newFileName = fmt.Sprintf("%s_%d%s", pDir, num, fileName[len(pDir):])
 		}
 
-		util.Copy(path.Join(srcPath, fileName),
-			path.Join(dstPath, newFileName))
+		util.Copy(path.Join(dstPath, newFileName),
+			path.Join(srcPath, fileName))
 	}
 }
