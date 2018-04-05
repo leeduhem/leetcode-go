@@ -178,3 +178,12 @@ func IsStrsEqualWithoutOrder(ss, ss1 []string) bool {
 
 	return true
 }
+
+func IsOneOf(ns []int, nss [][]int) bool {
+	for _, ns1 := range nss {
+		if IsIntsEqual(ns, ns1) {
+			return true
+		}
+	}
+	return false
+}
