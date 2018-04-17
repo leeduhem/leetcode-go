@@ -23,3 +23,13 @@ func SrcDirOf(pDir string) (string, error) {
 
 	return "", errors.New("No source directory for " + pDir)
 }
+
+func SrcDir() string {
+	goPath, ok := os.LookupEnv("GOPATH")
+	if !ok {
+		log.Fatal("No GOPATH environment variable")
+	}
+
+	// TODO: Find a portable way to split GOPATH
+	return path.Join(strings.Split(goPath, ":")[0], "src")
+}
