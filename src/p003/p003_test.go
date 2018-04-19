@@ -3,13 +3,24 @@ package p003
 import "testing"
 
 func TestLengthOfLongestSubstring(t *testing.T) {
-	ss := []string { "", "c", "bbbbb", "au", "abcabcbb", "pwwkew" }
-	rs := []int    {  0,  1,   1,       2,    3,          3       }
-	for i,s := range ss {
-		max := lengthOfLongestSubstring(s)
-		if max != rs[i] {
-			t.Errorf("Case %v: expected %v, got %v", s, rs[i], max)
+	testCase := func(in string, want int) {
+		got := lengthOfLongestSubstring(in)
+		if got != want {
+			t.Errorf("Case %v: expected %v, got %v", in, want, got)
 		}
 	}
-}
 
+	for _, t := range []struct {
+		in   string
+		want int
+	}{
+		{"", 0},
+		{"c", 1},
+		{"bbbbb", 1},
+		{"au", 2},
+		{"abcabcbb", 3},
+		{"pwwkew", 3},
+	} {
+		testCase(t.in, t.want)
+	}
+}
