@@ -1,49 +1,44 @@
 package p005_1
 
-import "testing"
+import (
+	"testing"
+)
 
-func checkResult(r string, rs []string, t *testing.T) {
-	ok := false
-
-	for _,r1 := range rs {
-		if (r == r1) {
-			ok = true
-		}
+func TestLongestPalindrome(t *testing.T) {
+	var tests = []struct {
+		in    string
+		wants []string
+	}{
+		{"", []string{""}},
+		{"a", []string{"a"}},
+		{"cbbd", []string{"bb"}},
+		{"babad", []string{"bab", "aba"}},
+		{"bb", []string{"bb"}},
+		{"世界界世", []string{"世界界世"}},
 	}
 
-	if !ok {
-		t.Errorf("Expected one of %v, got %v", rs, r)
+nextTest:
+	for _, test := range tests {
+		got := longestPalindrome(test.in)
+		for _, want := range test.wants {
+			if got == want {
+				continue nextTest
+			}
+		}
+		t.Errorf("longestPalindrome(%q) = %q, want one of %#v",
+			test.in, got, test.wants)
 	}
 }
 
-func TestLongestPalindrome(t *testing.T) {
-	s1  := "babad"
-	rs1 := []string {"bab", "aba"}
-	r1  := longestPalindrome(s1)
-	checkResult(r1, rs1, t)
+func BenchmarkLongestPalindrome(b *testing.B) {
+	in := "kyyrjtdplseovzwjkykrjwhxquwxsfsorjiumvxjhjmgeueafubtonhlerrgsgohfosqssmizcuqryqomsipovhhodpfyudtusjhonlqabhxfahfcjqxyckycstcqwxvicwkjeuboerkmjshfgiglceycmycadpnvoeaurqatesivajoqdilynbcihnidbizwkuaoegmytopzdmvvoewvhebqzskseeubnretjgnmyjwwgcooytfojeuzcuyhsznbcaiqpwcyusyyywqmmvqzvvceylnuwcbxybhqpvjumzomnabrjgcfaabqmiotlfojnyuolostmtacbwmwlqdfkbfikusuqtupdwdrjwqmuudbcvtpieiwteqbeyfyqejglmxofdjksqmzeugwvuniaxdrunyunnqpbnfbgqemvamaxuhjbyzqmhalrprhnindrkbopwbwsjeqrmyqipnqvjqzpjalqyfvaavyhytetllzupxjwozdfpmjhjlrnitnjgapzrakcqahaqetwllaaiadalmxgvpawqpgecojxfvcgxsbrldktufdrogkogbltcezflyctklpqrjymqzyzmtlssnavzcquytcskcnjzzrytsvawkavzboncxlhqfiofuohehaygxidxsofhmhzygklliovnwqbwwiiyarxtoihvjkdrzqsnmhdtdlpckuayhtfyirnhkrhbrwkdymjrjklonyggqnxhfvtkqxoicakzsxmgczpwhpkzcntkcwhkdkxvfnjbvjjoumczjyvdgkfukfuldolqnauvoyhoheoqvpwoisniv"
+	want := "qahaq"
 
-	s2  := "cbbd"
-	rs2 := []string {"bb"}
-	r2  := longestPalindrome(s2)
-	checkResult(r2, rs2, t)
-
-	s3  := "a"
-	rs3 := []string {"a"}
-	r3  := longestPalindrome(s3)
-	checkResult(r3, rs3, t)
-
-	s4  := ""
-	rs4 := []string {""}
-	r4  := longestPalindrome(s4)
-	checkResult(r4, rs4, t)
-
-	s5  := "bb"
-	rs5 := []string {"bb"}
-	r5  := longestPalindrome(s5)
-	checkResult(r5, rs5, t)
-
-	s6  := "kyyrjtdplseovzwjkykrjwhxquwxsfsorjiumvxjhjmgeueafubtonhlerrgsgohfosqssmizcuqryqomsipovhhodpfyudtusjhonlqabhxfahfcjqxyckycstcqwxvicwkjeuboerkmjshfgiglceycmycadpnvoeaurqatesivajoqdilynbcihnidbizwkuaoegmytopzdmvvoewvhebqzskseeubnretjgnmyjwwgcooytfojeuzcuyhsznbcaiqpwcyusyyywqmmvqzvvceylnuwcbxybhqpvjumzomnabrjgcfaabqmiotlfojnyuolostmtacbwmwlqdfkbfikusuqtupdwdrjwqmuudbcvtpieiwteqbeyfyqejglmxofdjksqmzeugwvuniaxdrunyunnqpbnfbgqemvamaxuhjbyzqmhalrprhnindrkbopwbwsjeqrmyqipnqvjqzpjalqyfvaavyhytetllzupxjwozdfpmjhjlrnitnjgapzrakcqahaqetwllaaiadalmxgvpawqpgecojxfvcgxsbrldktufdrogkogbltcezflyctklpqrjymqzyzmtlssnavzcquytcskcnjzzrytsvawkavzboncxlhqfiofuohehaygxidxsofhmhzygklliovnwqbwwiiyarxtoihvjkdrzqsnmhdtdlpckuayhtfyirnhkrhbrwkdymjrjklonyggqnxhfvtkqxoicakzsxmgczpwhpkzcntkcwhkdkxvfnjbvjjoumczjyvdgkfukfuldolqnauvoyhoheoqvpwoisniv"
-	rs6 := []string {"qahaq"}
-	r6  := longestPalindrome(s6)
-	checkResult(r6, rs6, t)
+	for i := 0; i < b.N; i++ {
+		got := longestPalindrome(in)
+		if got != want {
+			b.Errorf("longestPalindrome(%q) = %q, want %q",
+				in, got, want)
+		}
+	}
 }
