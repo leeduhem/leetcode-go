@@ -1,32 +1,38 @@
 package p006
 
-import "testing"
+import (
+	"testing"
+)
 
-func testCase(s, r string, n int, t *testing.T) {
-	r1 := convert(s, n)
-	if (r1 != r) {
-		t.Errorf("Expected %v, got %v", r, r1)
+func TestConvert(t *testing.T) {
+	var tests = []struct {
+		in0  string
+		in1  int
+		want string
+	}{
+		{"", 1, ""},
+		{"AB", 1, "AB"},
+		{"ABCDE", 4, "ABCED"},
+		{"ABCDEF", 4, "ABFCED"},
+		{"PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"},
+	}
+
+	for _, test := range tests {
+		got := convert(test.in0, test.in1)
+		if got != test.want {
+			t.Errorf("convert(%q, %v) = %q, want %q",
+				test.in0, test.in1, got, test.want)
+		}
 	}
 }
 
-func TestConvert(t *testing.T) {
-	s11 := "PAYPALISHIRING"
-	r10 := "PAHNAPLSIIGYIR"
-	testCase(s11, r10, 3, t)
-
-	s21 := "ABCDE"
-	r20 := "ABCED"
-	testCase(s21, r20, 4, t)
-
-	s31 := ""
-	r30 := ""
-	testCase(s31, r30, 1, t)
-
-	s41 := "AB"
-	r40 := "AB"
-	testCase(s41, r40, 1, t)
-
-	s51 := "ABCDEF"
-	r50 := "ABFCED"
-	testCase(s51, r50, 4, t)
+func BenchmarkConvert(b *testing.B) {
+	in0, in1, want := "PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"
+	for i := 0; i < b.N; i++ {
+		got := convert(in0, in1)
+		if got != want {
+			b.Errorf("convert(%q, %v) = %q, want %q",
+				in0, in1, got, want)
+		}
+	}
 }

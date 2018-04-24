@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/zigzag-conversion/description/
 package p006
 
 func convert(s string, numRows int) string {
@@ -6,7 +7,7 @@ func convert(s string, numRows int) string {
 	len0 := len(s)
 	isShort := false
 	for i := 0; i < len0; {
-		if (!isShort) {
+		if !isShort {
 			isShort = true
 
 			for j := 0; j < numRows && i < len0; j++ {
@@ -23,15 +24,15 @@ func convert(s string, numRows int) string {
 				i++
 			}
 
-			if (i < len0) {
+			if i < len0 {
 				m[numRows-1] = append(m[numRows-1], 0)
 			}
 		}
 	}
 
 	result := make([]byte, 0)
-	for _,r := range m {
-		for _,c := range r {
+	for _, r := range m {
+		for _, c := range r {
 			if c != 0 {
 				result = append(result, c)
 			}
