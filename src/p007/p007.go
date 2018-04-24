@@ -1,37 +1,31 @@
+// https://leetcode.com/problems/reverse-integer/description/
 package p007
 
 import (
+	"math"
 	"strconv"
 	"unicode"
-	"math"
 )
 
-func reverseString(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
+func reverseSlice(s []rune) {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
 	}
-	return string(r)
 }
 
 func reverse(x int) int {
-	xs := strconv.Itoa(x)
+	xs := []rune(strconv.Itoa(x))
 
-	var xs1 string
-	if (unicode.IsDigit(rune(xs[0]))) {
-		xs1 = reverseString(xs)
+	if unicode.IsDigit(xs[0]) {
+		reverseSlice(xs[:])
 	} else {
-		xs1 = xs[0:1] + reverseString(xs[1:])
+		reverseSlice(xs[1:])
 	}
 
-	x1,err := strconv.Atoi(xs1)
-	if (err == nil) {
-		if (math.MaxInt32 < x1 || x1 < math.MinInt32) {
-			return 0
+	if rx, err := strconv.Atoi(string(xs)); err == nil {
+		if math.MinInt32 <= rx && rx <= math.MaxInt32 {
+			return rx
 		}
-		return x1
-	} else {
-		return 0
 	}
+	return 0
 }
-
