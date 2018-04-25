@@ -1,55 +1,51 @@
+// https://leetcode.com/problems/string-to-integer-atoi/description/
 package p008
 
 import (
 	"math"
 	"unicode"
+	"unicode/utf8"
 )
 
 func myAtoi(str string) int {
-	var n int64 = 0
-	s := false
-
-	if (str == "") {
+	if len(str) == 0 {
 		return 0
 	}
 
-	// Ignore leading spaces
-	l := len(str)
 	i := 0
-	for ; i < l && unicode.IsSpace(rune(str[i])); i++ {
+
+	// Ignore leading white spaces
+	for j, c := range str {
+		if !unicode.IsSpace(c) {
+			i = j
+			break
+		}
 	}
 
+	sig := 1
 	if str[i] == '+' || str[i] == '-' {
-		if (str[i] == '-') {
-			s = true
+		if str[i] == '-' {
+			sig = -1
 		}
-
 		i++
 	}
 
-	for ; i < l && unicode.IsDigit(rune(str[i])); i++ {
-		n1 := n * 10 + int64(str[i] - '0')
-		// overflow
-		if n1 < n {
-			if s {
-				return math.MinInt32
-			} else {
-				return math.MaxInt32
-			}
+	var n uint64
+	for {
+		r, sz := utf8.DecodeRuneInString(str[i:])
+		if (r == utf8.RuneError && (sz == 0 || sz == 1)) ||
+			!unicode.IsDigit(r) {
+			return sig * int(n)
 		}
 
-		n = n1
-	}
+		n = n*10 + uint64(r-'0')
+		if n > math.MaxInt32 {
+			if sig < 0 {
+				return math.MinInt32
+			}
+			return math.MaxInt32
+		}
 
-	if (s) {
-		n = -n
+		i += sz
 	}
-
-	if (n > math.MaxInt32) {
-		return math.MaxInt32
-	}
-	if (n < math.MinInt32) {
-		return math.MinInt32
-	}
-	return int(n)
 }

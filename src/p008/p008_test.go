@@ -1,20 +1,30 @@
 package p008
 
-import "testing"
-
-func testCase(r0, r1 int, t *testing.T) {
-	if (r0 != r1) {
-		t.Errorf("Expected %v, got %v", r0, r1)
-	}
-}
+import (
+	"testing"
+)
 
 func TestMyAtoi(t *testing.T) {
-	testCase(10, myAtoi("10"), t)
-	testCase(123, myAtoi(" 123"), t)
-	testCase(-123, myAtoi("  -123"), t)
-	testCase(0, myAtoi(""), t)
-	testCase(0, myAtoi("+"), t)
-	testCase(2147483647, myAtoi("2147483648"), t)
-	testCase(2147483647, myAtoi("9223372036854775809"), t)
+	var tests = []struct {
+		in   string
+		want int
+	}{
+		{"", 0}, {"+", 0},
+		{"10", 10},
+		{" 123", 123}, {"  -123", -123},
+		{"123 ", 123},
+		{"2147483648", 2147483647},
+		{"9223372036854775809", 2147483647},
+		{"-6147483648", -2147483648},
+		{"-9223372036854775809", -2147483648},
+	}
+
+	for _, test := range tests {
+		got := myAtoi(test.in)
+		if got != test.want {
+			t.Errorf("myAtoi(%q) = %v, want %v",
+				test.in, got, test.want)
+		}
+	}
 
 }
