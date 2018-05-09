@@ -1,15 +1,23 @@
 package p009
 
-import "testing"
-
-func testCase(n int, r bool, t *testing.T) {
-	r1 := isPalindrome(n)
-	if (r != r1) {
-		t.Errorf("Case %v: expect %v, got %v", n, r, r1)
-	}
-}
+import (
+	"testing"
+)
 
 func TestIsPalindrome(t *testing.T) {
-	testCase(1, true, t)
-	testCase(-1, false, t)
+	tests := []struct {
+		in   int
+		want bool
+	}{
+		{1, true},
+		{-1, false},
+	}
+
+	for _, test := range tests {
+		got := isPalindrome(test.in)
+		if got != test.want {
+			t.Errorf("isPalindrome(%v) = %v, want = %v",
+				test.in, got, test.want)
+		}
+	}
 }
